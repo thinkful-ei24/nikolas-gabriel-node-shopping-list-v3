@@ -10,10 +10,9 @@ const uuid = require('uuid');
 // the API layer is implemented, and getting it to use an
 // existing model.
 
-
 function StorageException(message) {
-   this.message = message;
-   this.name = "StorageException";
+  this.message = message;
+  this.name = 'StorageException';
 }
 
 const ShoppingList = {
@@ -37,10 +36,11 @@ const ShoppingList = {
   },
   update: function(updatedItem) {
     console.log(`Deleting shopping list item \`${updatedItem.id}\``);
-    const {id} = updatedItem;
+    const { id } = updatedItem;
     if (!(id in this.items)) {
       throw StorageException(
-        `Can't update item \`${id}\` because doesn't exist.`)
+        `Can't update item \`${id}\` because doesn't exist.`
+      );
     }
     this.items[updatedItem.id] = updatedItem;
     return updatedItem;
@@ -74,16 +74,16 @@ const Recipes = {
   },
   update: function(updatedItem) {
     console.log(`Updating recipe with id \`${updatedItem.id}\``);
-    const {id} = updatedItem;
+    const { id } = updatedItem;
     if (!(id in this.items)) {
       throw StorageException(
-        `Can't update item \`${id}\` because doesn't exist.`)
+        `Can't update item \`${id}\` because doesn't exist.`
+      );
     }
     this.items[updatedItem.id] = updatedItem;
     return updatedItem;
   }
 };
-
 
 function createRecipes() {
   const storage = Object.create(Recipes);
@@ -94,4 +94,4 @@ function createRecipes() {
 module.exports = {
   ShoppingList: createShoppingList(),
   Recipes: createRecipes()
-}
+};
